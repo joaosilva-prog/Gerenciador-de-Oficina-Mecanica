@@ -10,7 +10,7 @@ namespace GerenciamentoDeOficina.Entities
         public int Ano { get; set; }
         public Tipo Tipo { get; set; }
 
-        public Veiculo(string placa, string modelo, int ano, Tipo tipo)
+        public Veiculo(Tipo tipo, string modelo, string placa, int ano)
         {
             Placa = placa;
             Modelo = modelo;
