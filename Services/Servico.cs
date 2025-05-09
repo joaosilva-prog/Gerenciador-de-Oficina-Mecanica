@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Globalization;
+using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Enums;
 
-namespace GerenciamentoDeOficina.Entities
+namespace GerenciamentoDeOficina.Services
 {
     class Servico
     {
@@ -13,7 +14,7 @@ namespace GerenciamentoDeOficina.Entities
         public Veiculo Veiculo { get; set; }
         public Funcionario Funcionario { get; set; }
         public Status Status { get; set; }
-        
+
         public Servico(Cliente cliente, string descricao, double valor, Veiculo veiculo, Funcionario funcionario, Status status)
         {
             Cliente = cliente;
