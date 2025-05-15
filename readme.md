@@ -1,30 +1,49 @@
-# 🙎🏽‍♂️João Silva
+<h1>Gerenciador de Oficina Mecânica</h1>
 
-**`Dev BackEnd`**
+Sobre o Projeto:
 
-Meu nome é João, tenho 21 anos e sou de Poços de Caldas - MG. Atualmente cursando Análise e Desenvolvimento de Sistemas pela UNIFEOB, sou entusiasta de BackEnd, GameDev e Pixel Artista nas horas vagas! Estou em transição de carreira para a área dev atualmente me especializando em busca da primeira vaga na minha carreira profissional como programador! Seja Bem Vindo(a)!
+Este é um projeto de treinamento pessoal para prática de programação em C#, desenvolvido como uma aplicação console. O sistema simula o gerenciamento de uma oficina mecânica, com funcionalidades básicas para cadastro e controle de clientes, veículos e ordens de serviço.
 
-<p align="left">
-    <a href="https://github.com/joaosilva-prog?tab=repositories&sort=stargazers">
-        <img 
-            alt="Total de estrelas" 
-            title="Total de estrelas GitHub" 
-            src="https://custom-icon-badges.demolab.com/github/stars/joaosilva-prog?color=55960c&style=for-the-badge&labelColor=488207&logo=star&label=estrelas"
-        />
-    </a>
-    <a href="https://github.com/Larissakich?tab=followers">
-        <img 
-            alt="Seguidores" 
-            title="Me siga no GitHub" 
-            src="https://custom-icon-badges.demolab.com/github/followers/joaosilva-prog?color=236ad3&labelColor=1155ba&style=for-the-badge&logo=github&label=Seguidores&logoColor=white"
-        />
-    </a>
-</p>
+O armazenamento dos dados é feito em memória, usando listas genéricas, sem integração com bancos de dados ou frameworks ORM. O projeto está em desenvolvimento contínuo, com funcionalidades sendo adicionadas e aprimoradas constantemente.
 
----
+Funcionalidades Atuais:
 
-### 🤖 Linguagens e Tecnologias
+- Cadastro de clientes e veículos
 
+- Controle simples de ordens de serviço
 
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" />
-          
+- Visualização de dados salvos em listas durante a execução do programa
+
+- Estrutura inicial para expansão futura
+
+Tecnologias Utilizadas:
+
+- C# (Console Application), .NET 8.0.
+
+Como Usar:
+
+- Clone o repositório;
+
+- git clone https://github.com/joaosilva-prog/Gerenciador-de-Oficina-Mecanica.git
+
+- Abra a solução no Visual Studio ou outro IDE que suporte C#.
+
+- Compile e execute o projeto. A aplicação roda em modo console e interage via terminal.
+
+- Navegue pelo menu para testar as funcionalidades disponíveis.
+
+Próximos Passos:
+
+- Implementar persistência em arquivos ou banco de dados;
+
+- Melhorar a interface de usuário no console;
+
+- Adicionar validações e tratamento de erros mais robustos;
+
+- Expandir funcionalidades conforme aprendizado e necessidade;
+
+Contribuição:
+
+Este projeto é para aprendizado pessoal, mas contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests com melhorias.
+
+Contato: sjoao5498@gmail.com
