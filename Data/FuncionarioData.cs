@@ -1,16 +1,16 @@
 ﻿using System;
 using GerenciamentoDeOficina.OficinaExceptions;
 using GerenciamentoDeOficina.Entities;
+using GerenciamentoDeOficina.Data.InterfacesData;
 
 namespace GerenciamentoDeOficina.Data
 {
-    class FuncionarioData
+    class FuncionarioData : IFuncionarioData
     {
-        public List<Funcionario> Funcionarios { get; private set; }
+        public List<Funcionario> Funcionarios { get; private set; } = new List<Funcionario>();
 
         public FuncionarioData()
         {
-            Funcionarios = new List<Funcionario>();
         }
 
         public void CadastrarFuncionario(Funcionario funcionario)

@@ -1,16 +1,16 @@
 ﻿using System;
 using GerenciamentoDeOficina.OficinaExceptions;
 using GerenciamentoDeOficina.Entities;
+using GerenciamentoDeOficina.Data.InterfacesData;
 
 namespace GerenciamentoDeOficina.Data
 {
-    class ClienteData
+    class ClienteData : IClienteData
     {
-        public List<Cliente> Clientes { get; private set; }
+        public List<Cliente> Clientes { get; private set; } = new List<Cliente>();
 
         public ClienteData()
         {
-            Clientes = new List<Cliente>();
         }
 
         public void CadastrarCliente(Cliente cliente)

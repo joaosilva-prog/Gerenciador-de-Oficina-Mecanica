@@ -12,8 +12,11 @@ namespace GerenciamentoDeOficina
     {
         static void Main(string[] args)
         {
-            
-            MenuInicial menu = new MenuInicial();
+            var ClienteService = new ClienteService();
+            var FuncionarioService = new FuncionarioService();
+            var ServicoService = new ServicoService();
+
+            MenuInicial menu = new MenuInicial(ClienteService, FuncionarioService, ServicoService);
             menu.IniciarMenu();
         }
     }

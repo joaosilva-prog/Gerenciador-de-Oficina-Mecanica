@@ -3,16 +3,16 @@ using GerenciamentoDeOficina.Services;
 using GerenciamentoDeOficina.OficinaExceptions;
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Enums;
+using GerenciamentoDeOficina.Data.InterfacesData;
 
 namespace GerenciamentoDeOficina.Data
 {
-    class ServicoData
+    class ServicoData : IServicoData
     {
-        public List<Servico> Servicos { get; private set; }
+        public List<Servico> Servicos { get; private set; } = new List<Servico>();
 
         public ServicoData() 
         {
-            Servicos = new List<Servico>();
         }
 
         public void CriarServico(Cliente cliente, string descricao, double valor, Veiculo veiculo, Funcionario funcionario, Status status)

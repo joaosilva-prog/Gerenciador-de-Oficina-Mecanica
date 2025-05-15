@@ -1,21 +1,21 @@
 ﻿using System;
-using GerenciamentoDeOficina.Data;
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Services.InterfacesServices;
+using GerenciamentoDeOficina.Data.InterfacesData;
 
 namespace GerenciamentoDeOficina.Services
 {
     class FuncionarioService : IFuncionarioService
     {
-        private FuncionarioData FuncionarioData = new FuncionarioData();
+        private IFuncionarioData _funcionarioData;
         public void CadastrarFuncionario(Funcionario funcionario)
         {
-            FuncionarioData.CadastrarFuncionario(funcionario);
+            _funcionarioData.CadastrarFuncionario(funcionario);
         }
 
         public void RemoverFuncionario(Funcionario funcionario)
         {
-            FuncionarioData.RemoverFuncionario(funcionario);
+            _funcionarioData.RemoverFuncionario(funcionario);
         }
     }
 }

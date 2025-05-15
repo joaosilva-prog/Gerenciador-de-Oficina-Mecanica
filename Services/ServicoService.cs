@@ -1,17 +1,17 @@
 ﻿using System;
-using GerenciamentoDeOficina.Data;
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Enums;
 using GerenciamentoDeOficina.Services.InterfacesServices;
+using GerenciamentoDeOficina.Data.InterfacesData;
 
 namespace GerenciamentoDeOficina.Services
 {
     class ServicoService : IServicoService
     {
-        private ServicoData ServicoData = new ServicoData();
+        private IServicoData _servicoData;
         public void CriarServico(Cliente cliente, string descricao, double valor, Veiculo veiculo, Funcionario funcionario, Status status)
         {
-            ServicoData.CriarServico(cliente, descricao, valor, veiculo, funcionario, status);
+            _servicoData.CriarServico(cliente, descricao, valor, veiculo, funcionario, status);
         }
     }
 }

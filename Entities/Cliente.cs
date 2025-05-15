@@ -10,7 +10,7 @@ namespace GerenciamentoDeOficina.Entities
         }
         public override string ToString()
         {
-            return "Nome: " + Nome + "; Documento: " + Documento + "; Email: " + Email + ".";
+            return "DADOS CLIENTE: Nome: " + Nome + "; Documento: " + Documento + "; Email: " + Email + ".";
         }
     }
 }

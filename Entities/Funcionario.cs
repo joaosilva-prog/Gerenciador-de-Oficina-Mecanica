@@ -11,5 +11,10 @@ namespace GerenciamentoDeOficina.Entities
         {
             Cargo = cargo;
         }
+
+        public override string ToString()
+        {
+            return "DADOS FUNCIONÁRIO: Nome: " + Nome + "; Documento: " + Documento + "; Email: " + Email + ".";
+        }
     }
 }

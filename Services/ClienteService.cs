@@ -1,26 +1,24 @@
 ﻿using System;
 using GerenciamentoDeOficina.Entities;
-using GerenciamentoDeOficina.OficinaExceptions;
 using GerenciamentoDeOficina.Services.InterfacesServices;
-using GerenciamentoDeOficina.Data;
-
+using GerenciamentoDeOficina.Data.InterfacesData;
 
 namespace GerenciamentoDeOficina.Services
 {
     class ClienteService : IClienteService
     {
-        private ClienteData ClienteData = new ClienteData();
+        private IClienteData _clienteData;
         public void CadastrarCliente(Cliente cliente)
         {
-            ClienteData.CadastrarCliente(cliente);
+            _clienteData.CadastrarCliente(cliente);
         }
         public void RemoverCliente(Cliente cliente)
         {
-            ClienteData.RemoverCliente(cliente);
+            _clienteData.RemoverCliente(cliente);
         }
         public void BuscarPorDocumento(string documento)
         {
-            ClienteData.BuscarPorDocumento(documento);
+            _clienteData.BuscarPorDocumento(documento);
         }
 
     }
