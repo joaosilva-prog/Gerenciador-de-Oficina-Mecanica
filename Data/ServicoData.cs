@@ -1,6 +1,6 @@
 ﻿using System;
 using GerenciamentoDeOficina.Services;
-using GerenciamentoDeOficina.OficinaExceptions;
+using GerenciamentoDeOficina.Services.OficinaExceptions;
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Enums;
 using GerenciamentoDeOficina.Data.InterfacesData;

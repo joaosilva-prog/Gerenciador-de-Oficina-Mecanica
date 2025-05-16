@@ -1,5 +1,5 @@
 ﻿using System;
-using GerenciamentoDeOficina.OficinaExceptions;
+using GerenciamentoDeOficina.Services.OficinaExceptions;
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Data.InterfacesData;
 
@@ -16,13 +16,11 @@ namespace GerenciamentoDeOficina.Data
         public void CadastrarCliente(Cliente cliente)
         {
             Clientes.Add(cliente);
-            Console.WriteLine("Cliente Cadastrado com Sucesso!");
         }
 
         public void RemoverCliente(Cliente cliente)
         {
            Clientes.Remove(cliente);
-            Console.WriteLine("Cliente Removido com Sucesso!");
         }
 
         public void BuscarPorDocumento(string documento)

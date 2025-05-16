@@ -1,11 +1,11 @@
 ﻿using System;
 namespace GerenciamentoDeOficina.Enums
 {
-    enum Cargo
+    enum Cargo : int
     {
-        Atendente,
-        Gerente, 
-        Mecânico,
-        Supervisor
+        Atendente = 1,
+        Gerente = 2, 
+        Mecânico = 3,
+        Supervisor = 4
     }
 }

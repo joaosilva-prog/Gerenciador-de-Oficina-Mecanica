@@ -8,6 +8,12 @@ namespace GerenciamentoDeOficina.Services
     class ClienteService : IClienteService
     {
         private IClienteData _clienteData;
+
+        public ClienteService(IClienteData clienteData)
+        {
+            _clienteData = clienteData;
+        }
+
         public void CadastrarCliente(Cliente cliente)
         {
             _clienteData.CadastrarCliente(cliente);

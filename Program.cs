@@ -2,9 +2,10 @@
 using System.Globalization;
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Enums;
-using GerenciamentoDeOficina.OficinaExceptions;
+using GerenciamentoDeOficina.Services.OficinaExceptions; 
 using GerenciamentoDeOficina.Presentation;
 using GerenciamentoDeOficina.Services;
+using GerenciamentoDeOficina.Data;
 
 namespace GerenciamentoDeOficina
 {
@@ -12,7 +13,8 @@ namespace GerenciamentoDeOficina
     {
         static void Main(string[] args)
         {
-            var ClienteService = new ClienteService();
+            var ClienteData = new ClienteData();
+            var ClienteService = new ClienteService(ClienteData);
             var FuncionarioService = new FuncionarioService();
             var ServicoService = new ServicoService();
 

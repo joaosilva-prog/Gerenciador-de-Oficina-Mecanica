@@ -1,5 +1,5 @@
 ﻿using System;
-using GerenciamentoDeOficina.OficinaExceptions;
+using GerenciamentoDeOficina.Services.OficinaExceptions;
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Data.InterfacesData;
 
