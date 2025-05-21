@@ -20,7 +20,7 @@ namespace GerenciamentoDeOficina.Data
 
         public void RemoverCliente(Cliente cliente)
         {
-           Clientes.Remove(cliente);
+            Clientes.Remove(cliente);
         }
 
         public void BuscarPorDocumento(string documento)
@@ -44,6 +44,19 @@ namespace GerenciamentoDeOficina.Data
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+            }
+        }
+
+        public bool VerificarCliente(string documento)
+        {
+            var x = Clientes.Where(x => x.Documento == documento).ToList();
+            if (x.Count != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

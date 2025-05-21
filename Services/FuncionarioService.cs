@@ -8,6 +8,11 @@ namespace GerenciamentoDeOficina.Services
     class FuncionarioService : IFuncionarioService
     {
         private IFuncionarioData _funcionarioData;
+
+        public FuncionarioService(IFuncionarioData funcionarioData)
+        {
+            _funcionarioData = funcionarioData;
+        }
         public void CadastrarFuncionario(Funcionario funcionario)
         {
             _funcionarioData.CadastrarFuncionario(funcionario);

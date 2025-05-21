@@ -15,10 +15,14 @@ namespace GerenciamentoDeOficina
         {
             var ClienteData = new ClienteData();
             var ClienteService = new ClienteService(ClienteData);
-            var FuncionarioService = new FuncionarioService();
-            var ServicoService = new ServicoService();
+            var FuncionarioData = new FuncionarioData();
+            var FuncionarioService = new FuncionarioService(FuncionarioData);
+            var ServicoData = new ServicoData();
+            var ServicoService = new ServicoService(ServicoData);
+            var VeiculoData = new VeiculoData();
+            var VeiculoService = new VeiculoService(VeiculoData);
 
-            MenuInicial menu = new MenuInicial(ClienteService, FuncionarioService, ServicoService);
+            MenuInicial menu = new MenuInicial(ClienteService, FuncionarioService, ServicoService, VeiculoService);
             menu.IniciarMenu();
         }
     }

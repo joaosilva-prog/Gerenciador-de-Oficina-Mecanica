@@ -13,7 +13,6 @@ namespace GerenciamentoDeOficina.Services
         {
             _clienteData = clienteData;
         }
-
         public void CadastrarCliente(Cliente cliente)
         {
             _clienteData.CadastrarCliente(cliente);
@@ -26,6 +25,9 @@ namespace GerenciamentoDeOficina.Services
         {
             _clienteData.BuscarPorDocumento(documento);
         }
-
+        public bool VerificarCliente(string documento)
+        {
+           return _clienteData.VerificarCliente(documento);
+        }
     }
 }

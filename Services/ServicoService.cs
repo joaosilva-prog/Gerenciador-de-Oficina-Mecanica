@@ -9,6 +9,11 @@ namespace GerenciamentoDeOficina.Services
     class ServicoService : IServicoService
     {
         private IServicoData _servicoData;
+
+        public ServicoService(IServicoData servicoData)
+        {
+            _servicoData = servicoData;
+        }
         public void CriarServico(Cliente cliente, string descricao, double valor, Veiculo veiculo, Funcionario funcionario, Status status)
         {
             _servicoData.CriarServico(cliente, descricao, valor, veiculo, funcionario, status);

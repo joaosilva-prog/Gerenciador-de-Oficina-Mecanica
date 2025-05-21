@@ -2,10 +2,10 @@
 
 namespace GerenciamentoDeOficina.Enums
 {
-    enum Tipo
+    enum Tipo : int
     {
-        Carro,
-        Moto,
-        Caminhao
+        Carro = 1,
+        Moto = 2,
+        Caminhão = 3
     }
 }
