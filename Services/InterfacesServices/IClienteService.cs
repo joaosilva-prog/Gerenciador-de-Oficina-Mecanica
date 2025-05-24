@@ -10,5 +10,6 @@ namespace GerenciamentoDeOficina.Services.InterfacesServices
         public void RemoverCliente(Cliente cliente);
         public void BuscarPorDocumento(string documento);
         public bool VerificarCliente(string documento);
+        public Cliente ObterClientePorDocumento(string documento);
     }
 }

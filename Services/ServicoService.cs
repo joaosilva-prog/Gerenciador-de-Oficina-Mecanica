@@ -18,5 +18,14 @@ namespace GerenciamentoDeOficina.Services
         {
             _servicoData.CriarServico(cliente, descricao, valor, veiculo, funcionario, status);
         }
+        public Servico ObterServicoPorDocumento(string documento)
+        {
+            return _servicoData.ObterServicoPorDocumento(documento);
+        }
+
+        public void AlterarStatus(Servico servico, Status status)
+        {
+            _servicoData.AlterarStatus(servico, status);
+        }
     }
 }

@@ -29,5 +29,9 @@ namespace GerenciamentoDeOficina.Services
         {
            return _clienteData.VerificarCliente(documento);
         }
+        public Cliente ObterClientePorDocumento(string documento)
+        {
+            return _clienteData.ObterClientePorDocumento(documento);
+        }
     }
 }

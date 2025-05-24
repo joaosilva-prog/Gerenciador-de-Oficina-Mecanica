@@ -28,13 +28,11 @@ namespace GerenciamentoDeOficina.Services
 
         public override string ToString()
         {
-            return "-----------------------------------------" +
-                "\nCliente: " + Cliente +
-                "\nVeículo: " + Veiculo +
-                "\nServiço: " + Descricao +
-                "\nValor: " + Valor.ToString("F2", CultureInfo.InvariantCulture) +
-                "\nData de criação: " + Data +
-                "\n----------------------------------------- \n";
+            return "Cliente: " + Cliente + " " +
+                "Veículo: " + Veiculo + " " +
+                "Serviço: " + Descricao + " " +
+                "Valor: " + Valor.ToString("F2", CultureInfo.InvariantCulture) + " " +
+                "Data de criação: " + Data;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace GerenciamentoDeOficina.Data
                         throw new OficinaException("Desculpe, Documento de Cliente Inválido ou Não Identificado.");
 
                     }
-                    Console.WriteLine("Sucesso! Resultados com base na Busca:");
+ 
                     foreach (Cliente cliente in x)
                     {
                         Console.WriteLine(cliente);
@@ -58,6 +58,12 @@ namespace GerenciamentoDeOficina.Data
             {
                 return false;
             }
+        }
+
+        public Cliente ObterClientePorDocumento(string documento)
+        {
+            Cliente cliente = Clientes.FirstOrDefault(x => x.Documento == documento);
+            return cliente;
         }
     }
 }

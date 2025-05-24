@@ -2,6 +2,7 @@
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Services.InterfacesServices;
 using GerenciamentoDeOficina.Data.InterfacesData;
+using GerenciamentoDeOficina.Data;
 
 namespace GerenciamentoDeOficina.Services
 {
@@ -21,6 +22,16 @@ namespace GerenciamentoDeOficina.Services
         public void RemoverFuncionario(Funcionario funcionario)
         {
             _funcionarioData.RemoverFuncionario(funcionario);
+        }
+
+        public bool VerificarFuncionario(string documento)
+        {
+            return _funcionarioData.VerificarFuncionario(documento);
+        }
+
+        public Funcionario ObterFuncionarioPorDocumento(string documento)
+        {
+            return _funcionarioData.ObterFuncionarioPorDocumento(documento);
         }
     }
 }

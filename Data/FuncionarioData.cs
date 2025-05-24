@@ -16,12 +16,28 @@ namespace GerenciamentoDeOficina.Data
         public void CadastrarFuncionario(Funcionario funcionario)
         {
             Funcionarios.Add(funcionario);
-            Console.WriteLine("Funcionário Criado com Sucesso!");
         }
         public void RemoverFuncionario(Funcionario funcionario)
         {
             Funcionarios.Remove(funcionario);
-            Console.WriteLine("Funcionário Removido com Sucesso!");
+        }
+        public bool VerificarFuncionario(string documento)
+        {
+            var x = Funcionarios.Where(x => x.Documento == documento).ToList();
+            if (x.Count != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public Funcionario ObterFuncionarioPorDocumento(string documento)
+        {
+            Funcionario funcionario = Funcionarios.FirstOrDefault(x => x.Documento == documento);
+            return funcionario;
         }
     }
 }

@@ -40,6 +40,16 @@ namespace GerenciamentoDeOficina.Services
             return _clienteService.VerificarCliente(documento);
         }
 
+        public Cliente ObterClientePorDocumento(string documento)
+        {
+            return _clienteService.ObterClientePorDocumento(documento);
+        }
+
+        public Funcionario ObterFuncionarioPorDocumento(string documento)
+        {
+            return _funcionarioService.ObterFuncionarioPorDocumento(documento);
+        }
+
         public void CadastrarFuncionario(Funcionario funcionario)
         {
             _funcionarioService.CadastrarFuncionario(funcionario);
@@ -50,11 +60,25 @@ namespace GerenciamentoDeOficina.Services
             _funcionarioService.RemoverFuncionario(funcionario);
         }
 
+        public bool VerificarFuncionario(string documento)
+        {
+            return _funcionarioService.VerificarFuncionario(documento);
+        }
+
         public void CriarServico(Cliente cliente, string descricao, double valor, Veiculo veiculo, Funcionario funcionario, Status status)
         {
             _servicoService.CriarServico(cliente, descricao, valor, veiculo, funcionario, status);
         }
 
+        public Servico ObterServicoPorDocumento(string documento)
+        {
+            return _servicoService.ObterServicoPorDocumento(documento);
+        }
+
+        public void AlterarStatus(Servico servico, Status status)
+        {
+            _servicoService.AlterarStatus(servico, status);
+        }
         public void CadastrarVeiculo(Veiculo veiculo)
         {
             _veiculoService.CadastrarVeiculo(veiculo);
