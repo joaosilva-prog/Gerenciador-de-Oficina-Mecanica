@@ -31,6 +31,8 @@ namespace GerenciamentoDeOficina.Data
                 Console.WriteLine("ATENÇÃO: Não foram Cadastrados Serviços para este Cliente.");
                 Console.ResetColor();
                 Console.WriteLine("Cadastre um Novo Serviço para prosseguir ou verifique o documento informado.");
+                Console.WriteLine("Pressione qualquer tecla para continuar.");
+                Console.ReadLine();
             }
             return servico;
         }
@@ -48,6 +50,8 @@ namespace GerenciamentoDeOficina.Data
                 Console.WriteLine("ATENÇÃO: Não foram encontrados Serviços para este Cliente.");
                 Console.ResetColor();
                 Console.WriteLine("Cadastre um Novo Serviço para prosseguir ou verifique o documento informado.");
+                Console.WriteLine("Pressione qualquer tecla para continuar.");
+                Console.ReadLine();
             }
         }
     }
