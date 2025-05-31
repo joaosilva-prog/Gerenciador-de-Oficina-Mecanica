@@ -23,28 +23,10 @@ namespace GerenciamentoDeOficina.Data
             Clientes.Remove(cliente);
         }
 
-        public void BuscarPorDocumento(string documento)
+        public Cliente BuscarPorDocumento(string documento)
         {
-            try
-            {
-                var x = Clientes.Where(x => x.Documento == documento).ToList();
-                {
-                    if (x.Count == 0)
-                    {
-                        throw new OficinaException("Desculpe, Documento de Cliente Inválido ou Não Identificado.");
-
-                    }
- 
-                    foreach (Cliente cliente in x)
-                    {
-                        Console.WriteLine(cliente);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            Cliente cliente = Clientes.FirstOrDefault(x => x.Documento == documento);
+            return cliente;
         }
 
         public bool VerificarCliente(string documento)

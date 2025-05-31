@@ -7,5 +7,6 @@ namespace GerenciamentoDeOficina.Data.InterfacesData
     {
         public void CadastrarVeiculo(Veiculo veiculo);
         public void RemoverVeiculo(Veiculo veiculo);
+        public List<Veiculo> BuscarVeiculosPorDocumento(string documentoCliente);
     }
 }

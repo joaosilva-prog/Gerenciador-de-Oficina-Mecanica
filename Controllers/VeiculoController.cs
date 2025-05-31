@@ -53,7 +53,9 @@ namespace GerenciamentoDeOficina.Controllers
             string modelo = Console.ReadLine();
             Console.Write("Ano: ");
             int ano = int.Parse(Console.ReadLine());
-            Veiculo veiculo = new Veiculo(tipo, modelo, placa, ano);
+            Console.Write("Documento do Cliente deste Veículo: ");
+            string documentoCliente = Console.ReadLine();
+            Veiculo veiculo = new Veiculo(tipo, modelo, placa, ano, documentoCliente);
             _veiculoService.CadastrarVeiculo(veiculo);
             return veiculo;
         }

@@ -24,5 +24,10 @@ namespace GerenciamentoDeOficina.Services
         {
             _veiculoData.RemoverVeiculo(veiculo);
         }
+
+        public List<Veiculo> BuscarVeiculosPorDocumento(string documentoCliente)
+        {
+            return _veiculoData.BuscarVeiculosPorDocumento(documentoCliente);
+        }
     }
 }

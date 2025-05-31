@@ -17,6 +17,7 @@ namespace GerenciamentoDeOficina.Presentation
         private ServicoController _servicoController;
         private FuncionarioController _funcionarioController;
         private ClienteController _clienteController;
+        private ClienteView _clienteView;
         ConsoleColor ColorAux = Console.ForegroundColor;
 
         public MenuInicial(IClienteService clienteService, IFuncionarioService funcionarioService, IServicoService servicoService, IVeiculoService veiculoService)
@@ -25,6 +26,7 @@ namespace GerenciamentoDeOficina.Presentation
             _funcionarioController = new FuncionarioController(funcionarioService);
             _veiculoController = new VeiculoController(veiculoService);
             _servicoController = new ServicoController(servicoService, clienteService, _veiculoController, _funcionarioController, _clienteController);
+            _clienteView = new ClienteView(clienteService);
         }
 
         public void IniciarMenu()
@@ -46,7 +48,7 @@ namespace GerenciamentoDeOficina.Presentation
                 switch (opcao)
                 {
                     case "1":
-                        _clienteController.CadastrarCliente();
+                        _clienteView.CadastrarCliente();
                         break;
 
                     case "2":
