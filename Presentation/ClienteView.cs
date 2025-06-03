@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GerenciamentoDeOficina.Controllers;
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Services.InterfacesServices;
@@ -29,11 +25,11 @@ namespace GerenciamentoDeOficina.Presentation
             Console.ForegroundColor = ColorAux;
             Console.WriteLine();
             Console.Write("Nome Completo: ");
-            string nomeCliente = Console.ReadLine();
+            string nomeCliente = Console.ReadLine() ?? "";
             Console.Write("CPF: ");
-            string documentoCliente = Console.ReadLine();
+            string documentoCliente = Console.ReadLine() ?? "";
             Console.Write("E-mail: ");
-            string emailCliente = Console.ReadLine();
+            string emailCliente = Console.ReadLine() ?? "";
             _clienteController.CadastrarCliente(nomeCliente, documentoCliente, emailCliente);
             if (_clienteController.ClienteCadastrado == true)
             {
@@ -57,7 +53,7 @@ namespace GerenciamentoDeOficina.Presentation
             Console.ForegroundColor = ColorAux;
             Console.WriteLine();
             Console.Write("CPF do Cliente: ");
-            string documento = Console.ReadLine();
+            string documento = Console.ReadLine() ?? "";
             _clienteController.BuscarPorDocumento(documento);
         }
     }

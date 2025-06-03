@@ -8,15 +8,27 @@ namespace GerenciamentoDeOficina.Services
 {
     class FuncionarioService : IFuncionarioService
     {
+        ConsoleColor ColorAux = Console.ForegroundColor;
         private IFuncionarioData _funcionarioData;
 
         public FuncionarioService(IFuncionarioData funcionarioData)
         {
             _funcionarioData = funcionarioData;
         }
-        public void CadastrarFuncionario(Funcionario funcionario)
+        public bool CadastrarFuncionario(Funcionario funcionario)
         {
+            if (_funcionarioData.VerificarFuncionario(funcionario.Documento) == true)
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("ATENÇÃO: Cliente já existente.");
+                Console.ForegroundColor = ColorAux;
+                Console.WriteLine("Pressione qualquer tecla para continuar...");
+                Console.ReadLine();
+                return false;
+            }
             _funcionarioData.CadastrarFuncionario(funcionario);
+            return true;
         }
 
         public void RemoverFuncionario(Funcionario funcionario)
