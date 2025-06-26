@@ -1,49 +1,90 @@
-<h1>Gerenciador de Oficina Mecânica</h1>
+# 🔧 Gerenciador de Oficina Mecânica
 
-Sobre o Projeto:
+## 📌 Sobre o Projeto
 
-Este é um projeto de treinamento pessoal para prática de programação em C#, desenvolvido como uma aplicação console. O sistema simula o gerenciamento de uma oficina mecânica, com funcionalidades básicas para cadastro e controle de clientes, veículos e ordens de serviço.
+Este é um projeto pessoal desenvolvido em **C# (.NET 8.0)** com o objetivo de consolidar e praticar os conhecimentos adquiridos na linguagem e nos princípios da programação orientada a objetos.  
 
-O armazenamento dos dados é feito em memória, usando listas genéricas, sem integração com bancos de dados ou frameworks ORM. O projeto está em desenvolvimento contínuo, com funcionalidades sendo adicionadas e aprimoradas constantemente.
+O sistema foi criado como uma aplicação de console para simular o gerenciamento básico de uma oficina mecânica, com foco em boas práticas de estruturação, separação de camadas e lógica de fluxo.
 
-Funcionalidades Atuais:
+> ⚠️ Este é meu **primeiro projeto solo**, e está em constante evolução — não está perfeito, mas tem sido um aprendizado essencial e valioso na prática.
 
-- Cadastro de clientes e veículos
+---
 
-- Controle simples de ordens de serviço
+## 🛠️ Funcionalidades Atuais
 
-- Visualização de dados salvos em listas durante a execução do programa
+- Cadastro e listagem de **clientes**;
+- Cadastro de **veículos** associados a clientes;
+- Criação e gerenciamento de **ordens de serviço** (com status e vínculo ao cliente, veículo e funcionário);
+- Cadastro e verificação de **funcionários**;
+- Navegação e execução de ações via **menu interativo em console**;
+- Validações básicas de entrada e controle de fluxo.
 
-- Estrutura inicial para expansão futura
+---
 
-Tecnologias Utilizadas:
+## 🧠 Aprendizados e Objetivos
 
-- C# (Console Application), .NET 8.0.
+- Estruturação em **camadas (Data, Service, Controller, View)**;
+- Uso de **enums, encapsulamento, validações e polimorfismo**;
+- Lógica de verificação, retorno de estados com `bool` e tratamento de erros controlados;
+- Consolidação da **orientação a objetos na prática**;
+- Prática de **tratamento de exceções** e mensagens de feedback ao usuário;
+- Implementação progressiva de uma arquitetura mais limpa e flexível.
 
-Como Usar:
+---
 
-- Clone o repositório;
+## 🚧 Em Desenvolvimento
 
-- git clone https://github.com/joaosilva-prog/Gerenciador-de-Oficina-Mecanica.git
+- Melhoria na **interface do console** e na exibição de dados;
+- Organização do código para suporte a **persistência em arquivos ou banco de dados**;
+- Refatoração e melhorias contínuas na estrutura e nas responsabilidades das camadas;
+- Expansão de funcionalidades conforme avanço nos estudos.
 
-- Abra a solução no Visual Studio ou outro IDE que suporte C#.
+---
 
-- Compile e execute o projeto. A aplicação roda em modo console e interage via terminal.
+## 🛠 Tecnologias Utilizadas
 
-- Navegue pelo menu para testar as funcionalidades disponíveis.
+- **C# 12**
+- **.NET 8.0**
+- Console Application
+- Programação Orientada a Objetos
 
-Próximos Passos:
+---
 
-- Implementar persistência em arquivos ou banco de dados;
+## 🚀 Como Usar
 
-- Melhorar a interface de usuário no console;
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/joaosilva-prog/Gerenciador-de-Oficina-Mecanica.git
 
-- Adicionar validações e tratamento de erros mais robustos;
+2. Abra o projeto em um IDE como o Visual Studio ou Visual Studio Code com extensão C#.
 
-- Expandir funcionalidades conforme aprendizado e necessidade;
+3. Compile e execute o projeto.
 
-Contribuição:
+4. Navegue pelas opções do menu no terminal para interagir com as funcionalidades.
 
-Este projeto é para aprendizado pessoal, mas contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests com melhorias.
+---
 
-Contato: sjoao5498@gmail.com
+## 🤝 Contribuição
+Este projeto é voltado para aprendizado pessoal, mas sugestões e contribuições são sempre bem-vindas!
+Sinta-se à vontade para abrir issues ou enviar pull requests com melhorias, ideias ou feedbacks.
+
+📫 Contato:
+
+📧 Email: sjoao5498@gmail.com
+
+🌐 GitHub: @joaosilva-prog
+
+
+Obrigado por acompanhar este começo de jornada! Mais projetos virão.
+
+--- 
+
+## 📸 Imagens 
+
+![image](https://github.com/user-attachments/assets/9d6abf09-0013-4106-a555-9398bc1690ea)
+
+![image](https://github.com/user-attachments/assets/ddc4f6aa-45be-4bbc-98aa-e52a5f06cc93)
+
+![image](https://github.com/user-attachments/assets/a9ed647a-8c11-464b-9cb8-5e42dc8f53a2)
+
+![image](https://github.com/user-attachments/assets/fba547ee-8d51-4197-8b26-0845791739a1)
