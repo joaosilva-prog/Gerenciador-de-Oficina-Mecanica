@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Globalization;
-using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Enums;
 
-namespace GerenciamentoDeOficina.Services
+namespace GerenciamentoDeOficina.Entities
 {
     class Servico
     {
@@ -28,11 +27,11 @@ namespace GerenciamentoDeOficina.Services
 
         public override string ToString()
         {
-            return "Cliente: " + Cliente + " " +
-                "Veículo: " + Veiculo + " " +
-                "Serviço: " + Descricao + " " +
-                "Valor: " + Valor.ToString("F2", CultureInfo.InvariantCulture) + " " +
-                "Data de criação: " + Data;
+            return "DADOS DO SERVIÇO: " +
+                "\nVeículo: " + Veiculo +
+                "\nServiço: " + Descricao +
+                "\nValor: " + Valor.ToString("F2", CultureInfo.InvariantCulture) +
+                "\nData de criação: " + Data;
         }
     }
 }

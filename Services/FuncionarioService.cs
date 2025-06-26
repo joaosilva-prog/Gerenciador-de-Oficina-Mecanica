@@ -2,7 +2,6 @@
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Services.InterfacesServices;
 using GerenciamentoDeOficina.Data.InterfacesData;
-using GerenciamentoDeOficina.Data;
 
 namespace GerenciamentoDeOficina.Services
 {
@@ -19,21 +18,20 @@ namespace GerenciamentoDeOficina.Services
         {
             if (_funcionarioData.VerificarFuncionario(funcionario.Documento) == true)
             {
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ATENÇÃO: Cliente já existente.");
-                Console.ForegroundColor = ColorAux;
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadLine();
                 return false;
             }
             _funcionarioData.CadastrarFuncionario(funcionario);
             return true;
         }
 
-        public void RemoverFuncionario(Funcionario funcionario)
+        public bool RemoverFuncionario(Funcionario funcionario)
         {
+            if (_funcionarioData.VerificarFuncionario(funcionario.Documento) == false)
+            {
+                return false;
+            }
             _funcionarioData.RemoverFuncionario(funcionario);
+            return true;
         }
 
         public bool VerificarFuncionario(string documento)

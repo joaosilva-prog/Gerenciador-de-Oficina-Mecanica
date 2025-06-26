@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Enums;
-using GerenciamentoDeOficina.Services;
 using GerenciamentoDeOficina.Services.InterfacesServices;
 
 namespace GerenciamentoDeOficina.Controllers
@@ -14,7 +9,9 @@ namespace GerenciamentoDeOficina.Controllers
     {
         private IFuncionarioService _funcionarioService;
         public bool FuncionarioCadastrado { get; private set; }
-        ConsoleColor ColorAux = Console.ForegroundColor;
+        public bool FuncionarioEncontrado { get; private set; }
+        public bool FuncionarioVerificado { get; private set; }
+        public bool CamposOK { get; private set; }
         public FuncionarioController(IFuncionarioService funcionarioService)
         {
             _funcionarioService = funcionarioService;
@@ -31,13 +28,10 @@ namespace GerenciamentoDeOficina.Controllers
                string.IsNullOrWhiteSpace(documentoFuncionario) ||
                string.IsNullOrWhiteSpace(emailFuncionario))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ATENÇÃO: Todos os campos são obrigatórios!");
-                Console.ForegroundColor = ColorAux;
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadLine();
+                CamposOK = false;
                 return;
             }
+            CamposOK = true;
             Funcionario funcionario = new Funcionario(nomeFuncionario, documentoFuncionario, emailFuncionario, cargo);
             FuncionarioCadastrado = _funcionarioService.CadastrarFuncionario(funcionario);
         }
@@ -49,7 +43,8 @@ namespace GerenciamentoDeOficina.Controllers
 
         public bool VerificarFuncionario(string documento)
         {
-            return _funcionarioService.VerificarFuncionario(documento);
+            FuncionarioVerificado = _funcionarioService.VerificarFuncionario(documento);
+            return FuncionarioVerificado;
         }
     }
 }

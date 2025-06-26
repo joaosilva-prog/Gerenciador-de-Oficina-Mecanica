@@ -1,5 +1,4 @@
 ﻿using System;
-using GerenciamentoDeOficina.Services.OficinaExceptions;
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Data.InterfacesData;
 
@@ -15,29 +14,59 @@ namespace GerenciamentoDeOficina.Data
 
         public void CadastrarFuncionario(Funcionario funcionario)
         {
-            Funcionarios.Add(funcionario);
+            try
+            {
+                Funcionarios.Add(funcionario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao cadastrar funcionário no repositório.", ex);
+            }
+
         }
         public void RemoverFuncionario(Funcionario funcionario)
         {
-            Funcionarios.Remove(funcionario);
+            try
+            {
+                Funcionarios.Remove(funcionario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao remover funcionário do repositório.", ex);
+            }
         }
         public bool VerificarFuncionario(string documento)
         {
-            var x = Funcionarios.Where(x => x.Documento == documento).ToList();
-            if (x.Count != 0)
+            try
             {
-                return true;
+                var x = Funcionarios.Where(x => x.Documento == documento).ToList();
+                if (x.Count != 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return false;
+                throw new Exception("Erro ao verificar funcionário no repositório.", ex);
             }
+            
         }
 
         public Funcionario ObterFuncionarioPorDocumento(string documento)
         {
-            Funcionario funcionario = Funcionarios.FirstOrDefault(x => x.Documento == documento);
-            return funcionario;
+            try
+            {
+                Funcionario funcionario = Funcionarios.FirstOrDefault(x => x.Documento == documento);
+                return funcionario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao obter funcionário por documento no repositório.", ex);
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace GerenciamentoDeOficina.Entities
 
         public override string ToString()
         {
-            return Modelo + " - " + "Placa: " + Placa;
+            return Modelo + " | " + "Placa: " + Placa + " | " + Ano;
         }
     }
 }

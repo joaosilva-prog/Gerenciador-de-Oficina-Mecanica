@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Globalization;
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Enums;
-using GerenciamentoDeOficina.Services;
+using GerenciamentoDeOficina.Presentation;
 using GerenciamentoDeOficina.Services.InterfacesServices;
 
 namespace GerenciamentoDeOficina.Controllers
@@ -11,87 +10,74 @@ namespace GerenciamentoDeOficina.Controllers
     {
         private IServicoService _servicoService;
         private IClienteService _clienteService;
-        private VeiculoController _veiculoController;
-        private FuncionarioController _funcionarioController;
-        private ClienteController _clienteController;
-        ConsoleColor ColorAux = Console.ForegroundColor;
-        public ServicoController(IServicoService servicoService, IClienteService clienteService, VeiculoController veiculoController, FuncionarioController funcionarioController, ClienteController clienteController)
+        private IVeiculoService _veiculoService;
+        private IFuncionarioService _funcionarioService;
+        public bool ServicoCadastrado { get; private set; }
+        public bool StatusAlterado { get; private set; }
+        public bool ClienteEncontrado { get; private set; }
+        public bool FuncionarioEncontrado { get; private set; }
+        public bool VeiculoEncontrado { get; private set; }
+        public bool CamposOk { get; private set; }
+        public ServicoController(IServicoService servicoService, IClienteService clienteService, IVeiculoService veiculoService, IFuncionarioService funcionarioService)
         {
             _servicoService = servicoService;
             _clienteService = clienteService;
-            _veiculoController = veiculoController;
-            _funcionarioController = funcionarioController;
-            _clienteController = clienteController;
+            _funcionarioService = funcionarioService;
+            _veiculoService = veiculoService;
         }
 
-        public void CriarServico()
+        public void CriarServico(string documentoCliente, string descricao, double valor, string documentoFuncionario)
         {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("=== CRIAÇÃO DE NOVO SERVIÇO ===");
-            Console.ForegroundColor = ColorAux;
-            Console.WriteLine();
-            Console.Write("CPF do Cliente: ");
-            string documento = Console.ReadLine();
+            Cliente cliente;
+            Funcionario funcionario;
+            Veiculo veiculo;
 
-            if (_clienteService.VerificarCliente(documento) == true)
+            if (string.IsNullOrWhiteSpace(documentoCliente) ||
+               string.IsNullOrWhiteSpace(descricao) ||
+               valor == 0 ||
+               string.IsNullOrWhiteSpace(documentoFuncionario))
             {
-                Veiculo veiculo;
-                veiculo = _veiculoController.CadastrarVeiculo();
-                if (veiculo == null)
-                {
-                    Console.WriteLine();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("ATENÇÃO: Erro ao cadastrar veículo. Operação cancelada.");
-                    Console.ForegroundColor = ColorAux;
-                    Console.WriteLine("Pressione qualquer tecla para continuar...");
-                    Console.ReadLine();
-                    return;
-                }
-                Console.Write("Descrição do Serviço: ");
-                string descricao = Console.ReadLine();
-                Console.Write("Valor (R$): ");
-                double valor = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-                Console.Write("CPF do Funcionário responsável: ");
-                string documentoFuncionario = Console.ReadLine();
-                if (_funcionarioController.VerificarFuncionario(documentoFuncionario) == true)
-                {
-                    Status status = Status.Pendente;
-                    Cliente cliente = _clienteController.ObterClientePorDocumento(documento);
-                    Funcionario funcionario = _funcionarioController.ObterFuncionarioPorDocumento(documentoFuncionario);
-                    _servicoService.CriarServico(cliente, descricao, valor, veiculo, funcionario, status);
-                    Console.WriteLine("Status inicial: " + status);
-                    Console.WriteLine();
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine("> Serviço cadastrado com sucesso!");
-                    Console.ForegroundColor = ColorAux;
-                    Console.WriteLine("Pressione qualquer tecla para continuar...");
-                    Console.ReadLine();
-                }
-                else
-                {
-                    Console.WriteLine();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("ATENÇÃO: Funcionário não Identificado ou não Cadastrado!");
-                    Console.ForegroundColor = ColorAux;
-                    Console.WriteLine("Cadastre um Novo Funcionário para prosseguir ou verifique o documento informado.");
-                    Console.WriteLine("Pressione qualquer tecla para continuar...");
-                    Console.ReadLine();
-                    return;
-                }
-
+                CamposOk = false;
+                return;
+            }
+            CamposOk = true;
+            if (_clienteService.VerificarCliente(documentoCliente) == true)
+            {
+                ClienteEncontrado = true;
+                cliente = _clienteService.ObterClientePorDocumento(documentoCliente);
             }
             else
             {
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ATENÇÃO: Funcionário não Identificado ou não Cadastrado!");
-                Console.ForegroundColor = ColorAux;
-                Console.WriteLine("Cadastre um Novo Funcionário para prosseguir ou verifique o documento informado.");
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadLine();
+                ClienteEncontrado = false;
                 return;
             }
+            if (_funcionarioService.VerificarFuncionario(documentoFuncionario) == true)
+            {
+                FuncionarioEncontrado = true;
+                funcionario = _funcionarioService.ObterFuncionarioPorDocumento(documentoFuncionario);
+            }
+            else
+            {
+                FuncionarioEncontrado = false;
+                return;
+            }
+            if (_veiculoService.VerificarVeiculo(documentoCliente) == true)
+            {
+                VeiculoEncontrado = true;
+                veiculo = _veiculoService.ObterVeiculoPorDocumento(documentoCliente);
+            }
+            else
+            {
+                VeiculoEncontrado = false;
+                return;
+            }
+            Status status = Status.Pendente;
+            ServicoCadastrado = _servicoService.CriarServico(cliente, descricao, valor, veiculo, funcionario, status);
+        }
+
+        public List<Servico> ObterServicosDoCliente(string documentoCliente)
+        {
+            return _servicoService.ObterServicosPorCliente(documentoCliente);
         }
 
         public Servico ObterServicoPorDocumento(string documento)
@@ -99,61 +85,9 @@ namespace GerenciamentoDeOficina.Controllers
             return _servicoService.ObterServicoPorDocumento(documento);
         }
 
-        public void AlterarStatus()
+        public void AlterarStatus(Servico servico, Status novoStatus)
         {
-            Status novoStatus;
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("=== ALTERAR STATUS DE UM SERVIÇO ===");
-            Console.ForegroundColor = ColorAux;
-            Console.WriteLine();
-            Console.Write("CPF do Cliente: ");
-            string documento = Console.ReadLine();
-
-            Console.WriteLine("Serviços encontrados:");
-            Servico servico = ObterServicoPorDocumento(documento);
-            if (servico == null) return;
-            Console.WriteLine(servico);
-            Console.ReadLine();
-            Console.WriteLine("Novo status: ");
-            Console.WriteLine("[1] Em Andamento");
-            Console.WriteLine("[2] Finalizado");
-            Console.Write("Escolha a nova opção: ");
-            string resp = Console.ReadLine();
-            if (resp == "1")
-            {
-                novoStatus = Status.EmExcecucao;
-                _servicoService.AlterarStatus(servico, novoStatus);
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("> Serviço cadastrado com sucesso!");
-                Console.ForegroundColor = ColorAux;
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadLine();
-            }
-            else if (resp == "2")
-            {
-                novoStatus = Status.Finalizado;
-                _servicoService.AlterarStatus(servico, novoStatus);
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("> Serviço cadastrado com sucesso!");
-                Console.ForegroundColor = ColorAux;
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ATENÇÃO: Status selecionado não Identificado ou não Cadastrado!");
-                Console.ForegroundColor = ColorAux;
-                Console.WriteLine("Selecione um Status Válido para prosseguir.");
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadLine();
-
-            }
+            StatusAlterado = _servicoService.AlterarStatus(servico, novoStatus);
         }
     }
-
 }

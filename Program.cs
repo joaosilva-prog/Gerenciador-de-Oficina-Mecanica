@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using GerenciamentoDeOficina.Entities;
-using GerenciamentoDeOficina.Enums;
-using GerenciamentoDeOficina.Services.OficinaExceptions; 
 using GerenciamentoDeOficina.Presentation;
 using GerenciamentoDeOficina.Services;
 using GerenciamentoDeOficina.Data;

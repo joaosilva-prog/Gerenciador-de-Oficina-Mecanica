@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Globalization;
-using GerenciamentoDeOficina.Data;
-using GerenciamentoDeOficina.Entities;
-using GerenciamentoDeOficina.Enums;
-using GerenciamentoDeOficina.Services;
 using GerenciamentoDeOficina.Services.InterfacesServices;
-using GerenciamentoDeOficina.Services.OficinaExceptions;
 using GerenciamentoDeOficina.Controllers;
 
 namespace GerenciamentoDeOficina.Presentation
@@ -14,11 +8,13 @@ namespace GerenciamentoDeOficina.Presentation
     {
         private bool _sair = false;
         private VeiculoController _veiculoController;
-        private ServicoController _servicoController;
         private FuncionarioController _funcionarioController;
         private ClienteController _clienteController;
+        private ServicoController _servicoController;
         private ClienteView _clienteView;
         private FuncionarioView _funcionarioView;
+        private ServicoView _servicoView;
+        private VeiculoView _veiculoView;
         ConsoleColor ColorAux = Console.ForegroundColor;
 
         public MenuInicial(IClienteService clienteService, IFuncionarioService funcionarioService, IServicoService servicoService, IVeiculoService veiculoService)
@@ -26,9 +22,12 @@ namespace GerenciamentoDeOficina.Presentation
             _clienteController = new ClienteController(clienteService);
             _funcionarioController = new FuncionarioController(funcionarioService);
             _veiculoController = new VeiculoController(veiculoService);
-            _servicoController = new ServicoController(servicoService, clienteService, _veiculoController, _funcionarioController, _clienteController);
-            _clienteView = new ClienteView(clienteService);
-            _funcionarioView = new FuncionarioView(funcionarioService);
+            _servicoController = new ServicoController(servicoService, clienteService, veiculoService, funcionarioService);
+
+            _funcionarioView = new FuncionarioView(_funcionarioController);
+            _veiculoView = new VeiculoView(_veiculoController);
+            _clienteView = new ClienteView(_clienteController, _veiculoView, _servicoController);
+            _servicoView = new ServicoView(_servicoController, _clienteController, _funcionarioController, _veiculoController, _veiculoView);
         }
 
         public void IniciarMenu()
@@ -36,7 +35,9 @@ namespace GerenciamentoDeOficina.Presentation
             while (_sair != true)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("=== SISTEMA DE GERENCIAMENTO DE OFICINA ===");
+                Console.ForegroundColor = ColorAux;
                 Console.WriteLine();
                 Console.WriteLine("[1] Cadastrar Novo Cliente");
                 Console.WriteLine("[2] Cadastrar Novo Funcionário");
@@ -45,42 +46,51 @@ namespace GerenciamentoDeOficina.Presentation
                 Console.WriteLine("[5] Buscar Cliente por Documento");
                 Console.WriteLine("[6] Sair");
                 Console.Write("Digite a Opção Desejada: ");
-                string opcao = Console.ReadLine();
-
-                switch (opcao)
+                bool opcaoOK = int.TryParse(Console.ReadLine(), out int opcao);
+                if (opcaoOK == true)
                 {
-                    case "1":
-                        _clienteView.CadastrarCliente();
-                        break;
-
-                    case "2":
-                        _funcionarioView.CadastrarFuncionario();
-                        break;
-
-                    case "3":
-                        _servicoController.CriarServico();
-                        break;
-
-                    case "4":
-                        _servicoController.AlterarStatus();
-                        break;
-
-                    case "5":
-                        _clienteView.BuscarPorDocumento();
-                        break;
-
-                    case "6":
-                        Sair();
-                        break;
-                    default:
+                    switch (opcao)
+                    {
+                        case 1:
+                            _clienteView.CadastrarCliente();
+                            break;
+                        case 2:
+                            _funcionarioView.CadastrarFuncionario();
+                            break;
+                        case 3:
+                            _servicoView.CriarServico();
+                            break;
+                        case 4:
+                            _servicoView.AlterarStatus();
+                            break;
+                        case 5:
+                            _clienteView.BuscarPorDocumento();
+                            break;
+                        case 6:
+                            Sair();
+                            break;
+                        default:
+                            Console.WriteLine();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Escolha de Cargo inválida.");
+                            Console.ForegroundColor = ColorAux;
+                            Console.WriteLine("Pressione qualquer tecla para continuar...");
+                            Console.ReadLine();
+                            break;
+                    }
+                }
+                else
+                {
+                    {
                         Console.WriteLine();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("ATENÇÃO: Tipo de Serviço não Identificado!");
+                        Console.WriteLine("Entrada de dados inválida.");
                         Console.ForegroundColor = ColorAux;
-                        Console.WriteLine("Selecione um Tipo de Serviço Válido para prosseguir.");
+                        Console.WriteLine("Selecione uma das opções enumeradas.");
                         Console.WriteLine("Pressione qualquer tecla para continuar...");
                         Console.ReadLine();
                         break;
+                    }
                 }
             }
         }

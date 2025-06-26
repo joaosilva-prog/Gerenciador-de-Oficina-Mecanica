@@ -7,15 +7,13 @@ namespace GerenciamentoDeOficina.Presentation
 {
     class FuncionarioView
     {
-        private IFuncionarioService _funcionarioService;
         private FuncionarioController _funcionarioController;
+        public bool FuncionarioExistente { get; private set; }
         ConsoleColor ColorAux = Console.ForegroundColor;
 
-        public FuncionarioView(IFuncionarioService funcionarioService)
+        public FuncionarioView(FuncionarioController funcionarioController)
         {
-            _funcionarioService = funcionarioService;
-            _funcionarioController = new FuncionarioController(_funcionarioService);
-
+            _funcionarioController = funcionarioController;
         }
 
         public void CadastrarFuncionario()
@@ -39,37 +37,7 @@ namespace GerenciamentoDeOficina.Presentation
             Console.WriteLine("[4] Supervisor");
             Console.Write("Digite a Opção Desejada: ");
             bool cargoOK = int.TryParse(Console.ReadLine(), out int cargoInt);
-            if (cargoOK == true)
-            {
-                switch (cargoInt)
-                {
-                    case 1:
-                        cargo = Cargo.Atendente;
-                        _funcionarioController.CadastrarFuncionario(nomeFuncionario, documentoFuncionario, emailFuncionario, cargo);
-                        break;
-                    case 2:
-                        cargo = Cargo.Gerente;
-                        _funcionarioController.CadastrarFuncionario(nomeFuncionario, documentoFuncionario, emailFuncionario, cargo);
-                        break;
-                    case 3:
-                        cargo = Cargo.Mecânico;
-                        _funcionarioController.CadastrarFuncionario(nomeFuncionario, documentoFuncionario, emailFuncionario, cargo);
-                        break;
-                    case 4:
-                        cargo = Cargo.Supervisor;
-                        _funcionarioController.CadastrarFuncionario(nomeFuncionario, documentoFuncionario, emailFuncionario, cargo);
-                        break;
-                    default:
-                        Console.WriteLine();
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Escolha de Cargo inválida.");
-                        Console.ForegroundColor = ColorAux;
-                        Console.WriteLine("Pressione qualquer tecla para continuar...");
-                        Console.ReadLine();
-                        break;
-                }
-            }
-            else
+            if (cargoOK == false || cargoInt < 1 || cargoInt > 4)
             {
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -80,17 +48,46 @@ namespace GerenciamentoDeOficina.Presentation
                 Console.ReadLine();
                 return;
             }
-            if (_funcionarioController.FuncionarioCadastrado == true)
+            else
             {
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("> Funcionário cadastrado com sucesso!");
+                cargo = cargoInt switch
+                {
+                    1 => Cargo.Atendente,
+                    2 => Cargo.Gerente,
+                    3 => Cargo.Mecânico,
+                    4 => Cargo.Supervisor,
+                };
+                _funcionarioController.CadastrarFuncionario(nomeFuncionario, documentoFuncionario, emailFuncionario, cargo);
+            }
+            if (_funcionarioController.CamposOK == false)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("ATENÇÃO: Todos os campos são obrigatórios!");
                 Console.ForegroundColor = ColorAux;
                 Console.WriteLine("Pressione qualquer tecla para continuar...");
                 Console.ReadLine();
+                return;
             }
             else
             {
+                if (_funcionarioController.FuncionarioCadastrado == true)
+                {
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("> Funcionário cadastrado com sucesso!");
+                    Console.ForegroundColor = ColorAux;
+                    Console.WriteLine("Pressione qualquer tecla para continuar...");
+                    Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("ATENÇÃO: Funcionário já existente.");
+                    Console.ForegroundColor = ColorAux;
+                    Console.WriteLine("Pressione qualquer tecla para continuar...");
+                    Console.ReadLine();
+                }
             }
         }
     }

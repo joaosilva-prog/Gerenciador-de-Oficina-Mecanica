@@ -9,23 +9,36 @@ namespace GerenciamentoDeOficina.Services
     class ServicoService : IServicoService
     {
         private IServicoData _servicoData;
-
+        ConsoleColor ColorAux = Console.ForegroundColor;
         public ServicoService(IServicoData servicoData)
         {
             _servicoData = servicoData;
         }
-        public void CriarServico(Cliente cliente, string descricao, double valor, Veiculo veiculo, Funcionario funcionario, Status status)
+        public bool CriarServico(Cliente cliente, string descricao, double valor, Veiculo veiculo, Funcionario funcionario, Status status)
         {
-            _servicoData.CriarServico(cliente, descricao, valor, veiculo, funcionario, status);
+            if(_servicoData.ChecarServico(veiculo.Placa) == true)
+            {
+                
+                return false;
+            }
+            Servico servico = new Servico(cliente, descricao, valor, veiculo, funcionario, status);
+            _servicoData.CriarServico(servico);
+            return true;
+        }
+
+        public List<Servico> ObterServicosPorCliente(string documento)
+        {
+            return _servicoData.ObterServicosPorCliente(documento);
         }
         public Servico ObterServicoPorDocumento(string documento)
         {
             return _servicoData.ObterServicoPorDocumento(documento);
         }
 
-        public void AlterarStatus(Servico servico, Status status)
+        public bool AlterarStatus(Servico servico, Status status)
         {
             _servicoData.AlterarStatus(servico, status);
+            return true;
         }
     }
 }

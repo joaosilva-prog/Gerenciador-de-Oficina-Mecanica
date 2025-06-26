@@ -1,6 +1,7 @@
 ﻿using System;
 using GerenciamentoDeOficina.Entities;
 using GerenciamentoDeOficina.Enums;
+using GerenciamentoDeOficina.Services;
 using GerenciamentoDeOficina.Services.InterfacesServices;
 
 namespace GerenciamentoDeOficina.Controllers
@@ -8,56 +9,34 @@ namespace GerenciamentoDeOficina.Controllers
     class VeiculoController
     {
         private IVeiculoService _veiculoService;
-        ConsoleColor ColorAux = Console.ForegroundColor;
+        public bool VeiculoCadastrado { get; private set; }
+        public bool VeiculoVerificado { get; private set; }
+        public bool CamposOK { get; private set; }
         public VeiculoController(IVeiculoService veiculoService)
         {
             _veiculoService = veiculoService;
         }
-
-        public Veiculo CadastrarVeiculo()
+        public void CadastrarVeiculo(Tipo tipo, string modelo, string placa, int ano, string documentoCliente)
         {
-            Console.WriteLine("Tipo do Veículo:");
-            Console.WriteLine("[1] Carro");
-            Console.WriteLine("[2] Moto");
-            Console.WriteLine("[3] Caminhão");
-            Console.Write("Digite a Opção Desejada: ");
-            string tipoVeiculo = Console.ReadLine();
-            Tipo tipo = new Tipo();
-            switch (tipoVeiculo)
+            if (string.IsNullOrWhiteSpace(modelo) || string.IsNullOrWhiteSpace(placa) || ano <= 0 || string.IsNullOrWhiteSpace(documentoCliente))
             {
-                case "1":
-                    tipo = Tipo.Carro;
-                    break;
-
-                case "2":
-                    tipo = Tipo.Moto;
-                    break;
-
-                case "3":
-                    tipo = Tipo.Caminhão;
-                    break;
-
-                default:
-                    Console.WriteLine();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("ATENÇÃO: Tipo de Veículo não Identificado ou não Cadastrado!");
-                    Console.ForegroundColor = ColorAux;
-                    Console.WriteLine("Cadastre Veículo de Tipo Válido para prosseguir.");
-                    Console.WriteLine("Pressione qualquer tecla para continuar...");
-                    Console.ReadLine();
-                    return null;
+                CamposOK = false;
+                return;
             }
-            Console.Write("Placa do Veículo: ");
-            string placa = Console.ReadLine();
-            Console.Write("Modelo: ");
-            string modelo = Console.ReadLine();
-            Console.Write("Ano: ");
-            int ano = int.Parse(Console.ReadLine());
-            Console.Write("Documento do Cliente deste Veículo: ");
-            string documentoCliente = Console.ReadLine();
+            CamposOK = true;
             Veiculo veiculo = new Veiculo(tipo, modelo, placa, ano, documentoCliente);
-            _veiculoService.CadastrarVeiculo(veiculo);
-            return veiculo;
+            VeiculoCadastrado = _veiculoService.CadastrarVeiculo(veiculo);
+        }
+
+        public Veiculo ObterVeiculoPorDocumento(string documentoCliente)
+        {
+            return _veiculoService.ObterVeiculoPorDocumento(documentoCliente);
+        }
+
+        public bool VerificarVeiculo(string documento)
+        {
+            VeiculoVerificado = _veiculoService.VerificarVeiculo(documento);
+            return VeiculoVerificado;
         }
 
         public void RemoverVeiculo(Veiculo veiculo)
@@ -65,4 +44,6 @@ namespace GerenciamentoDeOficina.Controllers
             _veiculoService.RemoverVeiculo(veiculo);
         }
     }
+
+
 }

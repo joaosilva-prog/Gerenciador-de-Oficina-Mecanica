@@ -8,7 +8,9 @@ namespace GerenciamentoDeOficina.Controllers
     {
         private IClienteService _clienteService;
         public bool ClienteCadastrado { get; private set; }
-        ConsoleColor ColorAux = Console.ForegroundColor;
+        public bool ClienteEncontrado { get; private set; }
+        public bool ClienteVerificado { get; private set; }
+        public bool CamposOK { get; private set; }
         public ClienteController(IClienteService clienteService)
         {
             _clienteService = clienteService;
@@ -20,13 +22,10 @@ namespace GerenciamentoDeOficina.Controllers
                string.IsNullOrWhiteSpace(documentoCliente) ||
                string.IsNullOrWhiteSpace(emailCliente))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ATENÇÃO: Todos os campos são obrigatórios!");
-                Console.ForegroundColor = ColorAux;
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadLine();
+                CamposOK = false;
                 return;
             }
+            CamposOK = true;
             Cliente cliente = new Cliente(nomeCliente, documentoCliente, emailCliente);
             ClienteCadastrado = _clienteService.CadastrarCliente(cliente);
         }
@@ -36,23 +35,23 @@ namespace GerenciamentoDeOficina.Controllers
             _clienteService.RemoverCliente(cliente);
         }
 
-        public void BuscarPorDocumento(string documento)
+        public Cliente BuscarPorDocumento(string documento)
         {
             if (string.IsNullOrWhiteSpace(documento))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ATENÇÃO: O documento é obrigatório!");
-                Console.ForegroundColor = ColorAux;
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadLine();
-                return;
+                CamposOK =  false;
+                return null;
             }
-            _clienteService.BuscarPorDocumento(documento);
+            CamposOK = true;
+            Cliente cliente = _clienteService.BuscarPorDocumento(documento);
+            ClienteEncontrado = _clienteService.ClienteEncontrado;
+            return cliente;
         }
 
         public bool VerificarCliente(string documento)
         {
-            return _clienteService.VerificarCliente(documento);
+            ClienteVerificado = _clienteService.VerificarCliente(documento);
+            return ClienteVerificado;
         }
 
         public Cliente ObterClientePorDocumento(string documento)

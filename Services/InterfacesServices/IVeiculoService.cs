@@ -6,8 +6,10 @@ namespace GerenciamentoDeOficina.Services.InterfacesServices
 {
     interface IVeiculoService
     {
-        public void CadastrarVeiculo(Veiculo veiculo);
-        public void RemoverVeiculo(Veiculo veiculo);
+        public bool CadastrarVeiculo(Veiculo veiculo);
+        public bool RemoverVeiculo(Veiculo veiculo);
+        public Veiculo ObterVeiculoPorDocumento(string documentoCliente);
         public List<Veiculo> BuscarVeiculosPorDocumento(string documentoCliente);
+        public bool VerificarVeiculo(string documento);
     }
 }

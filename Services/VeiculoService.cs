@@ -10,19 +10,41 @@ namespace GerenciamentoDeOficina.Services
     class VeiculoService : IVeiculoService
     {
         private IVeiculoData _veiculoData;
+        ConsoleColor ColorAux = Console.ForegroundColor;
+        private IClienteService _clienteService;
 
         public VeiculoService(IVeiculoData veiculoData)
         {
             _veiculoData = veiculoData;
         }
-        public void CadastrarVeiculo(Veiculo veiculo)
+        public bool CadastrarVeiculo(Veiculo veiculo)
         {
+            if (_veiculoData.VerificarVeiculo(veiculo.Placa) == true)
+            {
+                return false;
+            }
             _veiculoData.CadastrarVeiculo(veiculo);
+            return true;
         }
 
-        public void RemoverVeiculo(Veiculo veiculo)
+        public Veiculo ObterVeiculoPorDocumento(string documentoCliente)
         {
+            return _veiculoData.ObterVeiculoPorDocumento(documentoCliente);
+        }
+
+        public bool RemoverVeiculo(Veiculo veiculo)
+        {
+            if (_veiculoData.VerificarVeiculo(veiculo.DocumentoCliente) == false)
+            {
+                return false;
+            }
             _veiculoData.RemoverVeiculo(veiculo);
+            return true;
+        }
+
+        public bool VerificarVeiculo(string documento)
+        {
+            return _veiculoData.VerificarVeiculo(documento);
         }
 
         public List<Veiculo> BuscarVeiculosPorDocumento(string documentoCliente)
